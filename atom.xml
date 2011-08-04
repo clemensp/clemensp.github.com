@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title></title>
+  <link href="http://clemensp.com/atom.xml" rel="self"/>
+  <link href="http://clemensp.com/"/>
+  <updated>2011-08-04T00:36:39-04:00</updated>
+  <id>http://clemensp.com/</id>
+  <author>
+    <name>Clemens Park</name>
+    
+  </author>
+
+  
+</feed>
