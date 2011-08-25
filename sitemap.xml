@@ -1,11 +1,15 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
+        <loc>http://clemensp.com/blog/2011/08/25/copy-and-pasting-in-vim/</loc>
+        <lastmod>2011-08-25T01:14:11-04:00</lastmod>
+    </url>
+    <url>
         <loc>http://clemensp.com/blog/archives/</loc>
-        <lastmod>2011-08-04T00:23:20-04:00</lastmod>
+        <lastmod>2011-08-25T01:14:11-04:00</lastmod>
     </url>
     <url>
         <loc>http://clemensp.com/</loc>
-        <lastmod>2011-08-04T00:23:20-04:00</lastmod>
+        <lastmod>2011-08-25T01:14:11-04:00</lastmod>
     </url>
 </urlset>

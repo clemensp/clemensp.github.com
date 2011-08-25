@@ -4,12 +4,130 @@
   <title></title>
   <link href="http://clemensp.com/atom.xml" rel="self"/>
   <link href="http://clemensp.com/"/>
-  <updated>2011-08-24T23:51:33-04:00</updated>
+  <updated>2011-08-25T01:18:16-04:00</updated>
   <id>http://clemensp.com/</id>
   <author>
     <name>Clemens Park</name>
     
   </author>
 
+  
+  <entry>
+    <title>Copy and Pasting in Vim</title>
+    <link href="http://clemensp.com/blog/2011/08/25/copy-and-pasting-in-vim/"/>
+    <updated>2011-08-25T00:02:00-04:00</updated>
+    <id>http://clemensp.com/blog/2011/08/25/copy-and-pasting-in-vim</id>
+    <content type="html">&lt;h2&gt;How I got to learn vim registers&lt;/h2&gt;
+
+&lt;p&gt;One of the things that bugged me the most when I was learning Vim was
+copy and pasting.&lt;/p&gt;
+
+&lt;p&gt;For example, I would copy a line with: &lt;code&gt;yy&lt;/code&gt;.  Then
+I would go to the section I wanted to put the yanked line, and of
+course, I would see a line that I had to delete first, so without
+thinking, I would type: &lt;code&gt;dd&lt;/code&gt;.  I would then quickly realize that
+I had lost the line that I copied, go up to the copied line, yank the
+line again, go down to the section again, and finally paste it.&lt;/p&gt;
+
+&lt;p&gt;Another case where copy and pasting bugged me was copying to/from the
+system clipboard.  For example, I had no idea how to copy and paste
+between different Vim windows.  I also had no idea how to copy from
+external pages into Vim other than highlighting the text from the
+external page, going into insert mode in Vim, and middle-clicking the
+mouse.&lt;/p&gt;
+
+&lt;p&gt;After feeling this limitation countless times, I finally decided to
+learn how the Vim registers worked, and how I could copy and paste at
+will.&lt;/p&gt;
+
+&lt;h2&gt;Vim registers&lt;/h2&gt;
+
+&lt;p&gt;Vim has something called registers, where various strings are stored,
+depending on the context and what actions you have taken.&lt;/p&gt;
+
+&lt;p&gt;For example, the &quot; register is Vim's default register, so when you yank
+or delete lines, they go into that register by default.  The % register
+holds the relative path of the current file.  You can view the contents
+of these registers by typing &lt;code&gt;:reg&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;You can perform actions with these registers by typing &quot;, followed by
+the register name, then the action you would like to perform.&lt;/p&gt;
+
+&lt;p&gt;For example, if you would like to paste the current file's relative path
+twice, you would type &lt;code&gt;&quot;%2p&lt;/code&gt;.  You can achieve the effect of the
+usual &lt;code&gt;p&lt;/code&gt; with &lt;code&gt;&quot;&quot;p&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;The null register&lt;/h2&gt;
+
+&lt;p&gt;At this point, you're probably wondering how this helps with the first
+issue I had with Vim, which is how I can avoid overwriting the content
+that I yanked in Vim.  This is solved by using the _ register, which
+is Vim's null register.&lt;/p&gt;
+
+&lt;p&gt;Let's say you've copied a line with &lt;code&gt;yy&lt;/code&gt;,
+and you have a line that you want to delete without losing the line
+you've yanked.  You can do that by typing &lt;code&gt;&quot;_dd&lt;/code&gt;.  Want to delete
+lines 38 to 43 without overwriting the yanked line?  No problem with
+&lt;code&gt;:38,43d_&lt;/code&gt;.  Alternatively, you can select those lines in visual
+mode, and type &lt;code&gt;:d_&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2&gt;Copy and pasting to and from the system register&lt;/h2&gt;
+
+&lt;p&gt;To solve the second issue I had, I used two other special Vim registers,
+namely the * and + registers.  The * register is where content that you
+highlight in linux operating systems go to, and the + register is where
+content that you copy/cut with &lt;code&gt;Ctrl+C&lt;/code&gt; or &lt;code&gt;Ctrl+X&lt;/code&gt; go to.&lt;/p&gt;
+
+&lt;p&gt;Now given the knowledge acquired from using the null register, you can
+safely guess that &lt;code&gt;&quot;+p&lt;/code&gt; would paste whatever you've copied using
+&lt;code&gt;Ctrl+C&lt;/code&gt;.  Copying into the clipboard is as simple(?) as &lt;code&gt;&quot;+yy&lt;/code&gt;,
+which you can test by pasting into somewhere else with &lt;code&gt;Ctrl+P&lt;/code&gt;.  If
+you copy with &lt;code&gt;&quot;*yy&lt;/code&gt; instead, you can paste it by middle-clicking
+the mouse, just as you would do with any content you've highlighted in
+linux.&lt;/p&gt;
+
+&lt;h2&gt;Re-mapping the default yank, delete, and paste behaviours in Vim&lt;/h2&gt;
+
+&lt;p&gt;I personally prefer using the Vim registers directly, so that I don't
+forget how to use them, but there are definitely a lot of people who
+would prefer to have copy and pasting to behave like any other editors
+out there.&lt;/p&gt;
+
+&lt;p&gt;In that case, you could consider re-mapping the default Vim behaviours by adding something
+like the following into your ~/.vimrc:&lt;/p&gt;
+
+&lt;p&gt;Re-map &lt;code&gt;d&lt;/code&gt; to delete into the null register&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nnoremap d &quot;_d
+vnoremap d &quot;_d
+nnoremap D &quot;_D
+vnoremap D &quot;_D
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Re-map &lt;code&gt;c&lt;/code&gt; to not change the default register's content&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nnoremap c &quot;_c
+vnoremap c &quot;_c
+nnoremap C &quot;_C
+vnoremap C &quot;_C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Re-map &lt;code&gt;y&lt;/code&gt; to copy into the system clipboard&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nnoremap y &quot;+y
+vnoremap y &quot;+y
+nnoremaP Y &quot;+Y
+vnoremaP Y &quot;+Y
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Re-map &lt;code&gt;p&lt;/code&gt; to paste from the system clipboard&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nnoremap p &quot;+p
+vnoremap p &quot;+p
+nnoremaP P &quot;+P
+vnoremaP P &quot;+P
+&lt;/code&gt;&lt;/pre&gt;
+</content>
+  </entry>
   
 </feed>
