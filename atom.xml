@@ -4,7 +4,7 @@
   <title></title>
   <link href="http://clemensp.com/atom.xml" rel="self"/>
   <link href="http://clemensp.com/"/>
-  <updated>2011-09-14T23:39:27-04:00</updated>
+  <updated>2011-09-15T00:05:36-04:00</updated>
   <id>http://clemensp.com/</id>
   <author>
     <name>Clemens Park</name>
@@ -45,28 +45,28 @@ will.&lt;/p&gt;
 &lt;p&gt;Vim has something called registers, where various strings are stored,
 depending on the context and what actions you have taken.&lt;/p&gt;
 
-&lt;p&gt;For example, the &quot; register is Vim's default register, so when you yank
+&lt;p&gt;For example, the &amp;#8221; register is Vim&amp;#8217;s default register, so when you yank
 or delete lines, they go into that register by default.  The % register
 holds the relative path of the current file.  You can view the contents
 of these registers by typing &lt;code&gt;:reg&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;You can perform actions with these registers by typing &quot;, followed by
+&lt;p&gt;You can perform actions with these registers by typing &amp;#8220;, followed by
 the register name, then the action you would like to perform.&lt;/p&gt;
 
-&lt;p&gt;For example, if you would like to paste the current file's relative path
+&lt;p&gt;For example, if you would like to paste the current file&amp;#8217;s relative path
 twice, you would type &lt;code&gt;&quot;%2p&lt;/code&gt;.  You can achieve the effect of the
 usual &lt;code&gt;p&lt;/code&gt; with &lt;code&gt;&quot;&quot;p&lt;/code&gt;.&lt;/p&gt;
 
 &lt;h2&gt;The null register&lt;/h2&gt;
 
-&lt;p&gt;At this point, you're probably wondering how this helps with the first
+&lt;p&gt;At this point, you&amp;#8217;re probably wondering how this helps with the first
 issue I had with Vim, which is how I can avoid overwriting the content
 that I yanked in Vim.  This is solved by using the _ register, which
-is Vim's null register.&lt;/p&gt;
+is Vim&amp;#8217;s null register.&lt;/p&gt;
 
-&lt;p&gt;Let's say you've copied a line with &lt;code&gt;yy&lt;/code&gt;,
+&lt;p&gt;Let&amp;#8217;s say you&amp;#8217;ve copied a line with &lt;code&gt;yy&lt;/code&gt;,
 and you have a line that you want to delete without losing the line
-you've yanked.  You can do that by typing &lt;code&gt;&quot;_dd&lt;/code&gt;.  Want to delete
+you&amp;#8217;ve yanked.  You can do that by typing &lt;code&gt;&quot;_dd&lt;/code&gt;.  Want to delete
 lines 38 to 43 without overwriting the yanked line?  No problem with
 &lt;code&gt;:38,43d_&lt;/code&gt;.  Alternatively, you can select those lines in visual
 mode, and type &lt;code&gt;:d_&lt;/code&gt;.&lt;/p&gt;
@@ -79,16 +79,16 @@ highlight in linux operating systems go to, and the + register is where
 content that you copy/cut with &lt;code&gt;Ctrl+C&lt;/code&gt; or &lt;code&gt;Ctrl+X&lt;/code&gt; go to.&lt;/p&gt;
 
 &lt;p&gt;Now given the knowledge acquired from using the null register, you can
-safely guess that &lt;code&gt;&quot;+p&lt;/code&gt; would paste whatever you've copied using
+safely guess that &lt;code&gt;&quot;+p&lt;/code&gt; would paste whatever you&amp;#8217;ve copied using
 &lt;code&gt;Ctrl+C&lt;/code&gt;.  Copying into the clipboard is as simple(?) as &lt;code&gt;&quot;+yy&lt;/code&gt;,
 which you can test by pasting into somewhere else with &lt;code&gt;Ctrl+P&lt;/code&gt;.  If
 you copy with &lt;code&gt;&quot;*yy&lt;/code&gt; instead, you can paste it by middle-clicking
-the mouse, just as you would do with any content you've highlighted in
+the mouse, just as you would do with any content you&amp;#8217;ve highlighted in
 linux.&lt;/p&gt;
 
 &lt;h2&gt;Re-mapping the default yank, delete, and paste behaviours in Vim&lt;/h2&gt;
 
-&lt;p&gt;I personally prefer using the Vim registers directly, so that I don't
+&lt;p&gt;I personally prefer using the Vim registers directly, so that I don&amp;#8217;t
 forget how to use them, but there are definitely a lot of people who
 would prefer to have copy and pasting to behave like any other editors
 out there.&lt;/p&gt;
@@ -104,7 +104,7 @@ nnoremap D &quot;_D
 vnoremap D &quot;_D
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;Re-map &lt;code&gt;c&lt;/code&gt; to not change the default register's content&lt;/p&gt;
+&lt;p&gt;Re-map &lt;code&gt;c&lt;/code&gt; to not change the default register&amp;#8217;s content&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;nnoremap c &quot;_c
 vnoremap c &quot;_c
