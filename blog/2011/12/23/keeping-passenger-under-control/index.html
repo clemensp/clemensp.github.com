@@ -5,7 +5,7 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>CP's Programming Adventures</title>
+  <title>CP's Programming Adventures: Keeping Passenger Under Control</title>
   <meta name="author" content="Clemens Park">
   
 
@@ -16,7 +16,7 @@
 
   
 
-  <link rel="canonical" href="http://clemensp.com/index.html"/>
+  <link rel="canonical" href="http://clemensp.com/blog/2011/12/23/keeping-passenger-under-control/"/>
   <link href="/favicon.png" rel="shortcut icon" />
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -94,15 +94,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
-
-
-
-  <article>
-    
+      <div>
+<article class="hentry">
+  
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2011/12/23/keeping-passenger-under-control/">Keeping Passenger Under Control</a></h1>
+      <h1 class="entry-title">Keeping Passenger Under Control</h1>
     
     
       <p class="meta">
@@ -118,7 +115,7 @@
   </header>
 
 
-  <div class="entry-content"><h2>The mysterious &#8220;memory leak&#8221;</h2>
+<div class="entry-content"><h2>The mysterious &#8220;memory leak&#8221;</h2>
 
 <p>Recently at my workplace, we started to migrate one of our projects from
 Rails 2 to Rails 3.1.  Everything seemed to go pretty well.  Then one day,
@@ -267,171 +264,68 @@ there were infact 2 workers up and running.  Success for real!!</p>
 unintrusively, and it was also nice to realize that there were no memory
 leaks after all.</p>
 </div>
+
+
   <footer>
-    <a rel="full-article" href="/blog/2011/12/23/keeping-passenger-under-control/">Read on &rarr;</a>
-  </footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Clemens Park</span></span>
+
+      
 
 
-  </article>
 
 
-  <article>
+<time datetime="2011-12-23 10:03:00 -0500" pubdate  updated >Dec 23<span>rd</span>, 2011</time>
+
+
+
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/passenger/'>passenger</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/ruby-on-rails/'>ruby-on-rails</a>
+  
+</span>
+
+
+    </p>
     
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/25/copy-and-pasting-in-vim/">Copy and Pasting in Vim</a></h1>
-    
-    
-      <p class="meta">
-
-
-
-
-<time datetime="2011-08-25 00:02:00 -0400" pubdate  updated >Aug 25<span>th</span>, 2011</time>
-
-
-</p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>How I got to learn vim registers</h2>
-
-<p>One of the things that bugged me the most when I was learning Vim was
-copy and pasting.</p>
-
-<p>For example, I would copy a line with: <code>yy</code>.  Then
-I would go to the section I wanted to put the yanked line, and of
-course, I would see a line that I had to delete first, so without
-thinking, I would type: <code>dd</code>.  I would then quickly realize that
-I had lost the line that I copied, go up to the copied line, yank the
-line again, go down to the section again, and finally paste it.</p>
-
-<p>Another case where copy and pasting bugged me was copying to/from the
-system clipboard.  For example, I had no idea how to copy and paste
-between different Vim windows.  I also had no idea how to copy from
-external pages into Vim other than highlighting the text from the
-external page, going into insert mode in Vim, and middle-clicking the
-mouse.</p>
-
-<p>After feeling this limitation countless times, I finally decided to
-learn how the Vim registers worked, and how I could copy and paste at
-will.</p>
-
-<h2>Vim registers</h2>
-
-<p>Vim has something called registers, where various strings are stored,
-depending on the context and what actions you have taken.</p>
-
-<p>For example, the &#8221; register is Vim&#8217;s default register, so when you yank
-or delete lines, they go into that register by default.  The % register
-holds the relative path of the current file.  You can view the contents
-of these registers by typing <code>:reg</code></p>
-
-<p>You can perform actions with these registers by typing &#8220;, followed by
-the register name, then the action you would like to perform.</p>
-
-<p>For example, if you would like to paste the current file&#8217;s relative path
-twice, you would type <code>"%2p</code>.  You can achieve the effect of the
-usual <code>p</code> with <code>""p</code>.</p>
-
-<h2>The null register</h2>
-
-<p>At this point, you&#8217;re probably wondering how this helps with the first
-issue I had with Vim, which is how I can avoid overwriting the content
-that I yanked in Vim.  This is solved by using the _ register, which
-is Vim&#8217;s null register.</p>
-
-<p>Let&#8217;s say you&#8217;ve copied a line with <code>yy</code>,
-and you have a line that you want to delete without losing the line
-you&#8217;ve yanked.  You can do that by typing <code>"_dd</code>.  Want to delete
-lines 38 to 43 without overwriting the yanked line?  No problem with
-<code>:38,43d_</code>.  Alternatively, you can select those lines in visual
-mode, and type <code>:d_</code>.</p>
-
-<h2>Copy and pasting to and from the system register</h2>
-
-<p>To solve the second issue I had, I used two other special Vim registers,
-namely the * and + registers.  The * register is where content that you
-highlight in linux operating systems go to, and the + register is where
-content that you copy/cut with <code>Ctrl+C</code> or <code>Ctrl+X</code> go to.</p>
-
-<p>Now given the knowledge acquired from using the null register, you can
-safely guess that <code>"+p</code> would paste whatever you&#8217;ve copied using
-<code>Ctrl+C</code>.  Copying into the clipboard is as simple(?) as <code>"+yy</code>,
-which you can test by pasting into somewhere else with <code>Ctrl+P</code>.  If
-you copy with <code>"*yy</code> instead, you can paste it by middle-clicking
-the mouse, just as you would do with any content you&#8217;ve highlighted in
-linux.</p>
-
-<h2>Re-mapping the default yank, delete, and paste behaviours in Vim</h2>
-
-<p>I personally prefer using the Vim registers directly, so that I don&#8217;t
-forget how to use them, but there are definitely a lot of people who
-would prefer to have copy and pasting to behave like any other editors
-out there.</p>
-
-<p>In that case, you could consider re-mapping the default Vim behaviours by adding something
-like the following into your ~/.vimrc:</p>
-
-<p>Re-map <code>d</code> to delete into the null register</p>
-
-<pre><code>nnoremap d "_d
-vnoremap d "_d
-nnoremap D "_D
-vnoremap D "_D
-</code></pre>
-
-<p>Re-map <code>c</code> to not change the default register&#8217;s content</p>
-
-<pre><code>nnoremap c "_c
-vnoremap c "_c
-nnoremap C "_C
-vnoremap C "_C
-</code></pre>
-
-<p>Re-map <code>y</code> to copy into the system clipboard</p>
-
-<pre><code>nnoremap y "+y
-vnoremap y "+y
-nnoremaP Y "+Y
-vnoremaP Y "+Y
-</code></pre>
-
-<p>Re-map <code>p</code> to paste from the system clipboard</p>
-
-<pre><code>nnoremap p "+p
-vnoremap p "+p
-nnoremaP P "+P
-vnoremaP P "+P
-</code></pre>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://clemensp.com/blog/2011/12/23/keeping-passenger-under-control/" data-via="" data-counturl="http://clemensp.com/blog/2011/12/23/keeping-passenger-under-control/" >Tweet</a>
+  
+  
+  <g:plusone size="medium"></g:plusone>
+  
 </div>
-  <footer>
-    <a rel="full-article" href="/blog/2011/08/25/copy-and-pasting-in-vim/">Read on &rarr;</a>
+
+    
   </footer>
+</article>
 
-
-  </article>
-
-<nav role="pagination">
-  <div>
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</nav>
-
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread"><div id="disqus_thread"></div>
 <script type="text/javascript">
-    var disqus_shortname = 'clemenspark';
-    (function () {
-      var s = document.createElement('script'); s.async = true;
-      s.type = 'text/javascript';
-      s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
-      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
+  var disqus_shortname = 'clemenspark';
+  var disqus_identifier = 'http://clemensp.com/blog/2011/12/23/keeping-passenger-under-control/';
+  var disqus_url = 'http://clemensp.com/blog/2011/12/23/keeping-passenger-under-control/';
+  //var disqus_developer = 1;
+  (function() {
+    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+  })();
 </script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
 
 </div>
+
 <aside role=sidebar>
   
     <section>
@@ -454,6 +348,7 @@ vnoremaP P "+P
 
   
 </aside>
+
 
     </div>
   </div>
