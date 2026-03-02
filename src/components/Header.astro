@@ -1,0 +1,67 @@
+---
+---
+<header>
+  <a href="/" class="header-link">
+    <img
+      src="/profile-pic.jpg"
+      alt="Clemens Park"
+      class="avatar"
+      width="40"
+      height="40"
+    />
+    <div class="header-text">
+      <span class="name">Clemens Park</span>
+      <span class="tagline">Writing about software and things</span>
+    </div>
+  </a>
+</header>
+
+<style>
+  header {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 2.5rem 1.5rem 2rem;
+    border-bottom: 1px solid var(--color-border);
+    margin-bottom: 2.5rem;
+  }
+
+  .header-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+
+  .header-link:hover {
+    opacity: 1;
+  }
+
+  .header-link:hover .name {
+    opacity: 0.7;
+  }
+
+  .avatar {
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .header-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .name {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .tagline {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+</style>

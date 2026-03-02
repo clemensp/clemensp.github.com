@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const siteTitle = 'Clemens Park';
+const fullTitle = title === siteTitle ? title : `${title} — ${siteTitle}`;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <meta property="og:title" content={fullTitle} />
+    {description && <meta property="og:description" content={description} />}
+    <meta name="generator" content={Astro.generator} />
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <slot />
+    <footer>
+      <p>© {new Date().getFullYear()} Clemens Park</p>
+    </footer>
+  </body>
+</html>
+
+<style>
+  footer {
+    max-width: var(--max-width);
+    margin: 3rem auto 2rem;
+    padding: 1.5rem 1.5rem 0;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    border-top: 1px solid var(--color-border);
+  }
+</style>
